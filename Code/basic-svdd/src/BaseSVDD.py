@@ -550,23 +550,23 @@ class BaseSVDD(BaseEstimator, OutlierMixin):
         end_time = time.time()
         print('Calculation of the grid scores is completed. Time cost %.4f seconds\n' % (end_time-start_time))
 
-        fig = plt.figure(figsize=(20, 6))
+        fig = plt.figure(figsize=(6, 6))
         
         # figure 1: the 3D contour
-        ax1 = fig.add_subplot(1, 3, 1, projection='3d') 
-        ax1.plot_surface(xv, yv, distance, cmap=color_map)
-        ax1.contourf(xv, yv, distance.A, n_level, zdir='z', offset=np.min(distance)*0.9, cmap=color_map)
-        ax1.set_zlim(np.min(distance)*0.9, np.max(distance)*1.05)
+        # ax1 = fig.add_subplot(1, 3, 1, projection='3d') 
+        # ax1.plot_surface(xv, yv, distance, cmap=color_map)
+        # ax1.contourf(xv, yv, distance.A, n_level, zdir='z', offset=np.min(distance)*0.9, cmap=color_map)
+        # ax1.set_zlim(np.min(distance)*0.9, np.max(distance)*1.05)
 
-        # figure 2: the 2D contour
-        ax2 = fig.add_subplot(1, 3, 2)    
-        ctf1 = ax2.contourf(xv, yv, distance, n_level, alpha=0.8, cmap=color_map)
-        ctf2 = ax2.contour(xv, yv, distance, n_level, colors='black', linewidths=1)
-        plt.clabel(ctf2, inline=True)
-        plt.colorbar(ctf1)
+        # # figure 2: the 2D contour
+        # ax2 = fig.add_subplot(1, 3, 2)    
+        # ctf1 = ax2.contourf(xv, yv, distance, n_level, alpha=0.8, cmap=color_map)
+        # ctf2 = ax2.contour(xv, yv, distance, n_level, colors='black', linewidths=1)
+        # plt.clabel(ctf2, inline=True)
+        # plt.colorbar(ctf1)
 
         # figure 3: the 2D contour and data
-        ax3 = fig.add_subplot(1, 3, 3)
+        ax3 = fig.add_subplot(1, 1, 1)
         _, y, _, _ = self._check_X_y(X, y) 
         tmp_1 = y == 1
         tmp_2 = y == -1
@@ -611,12 +611,13 @@ class BaseSVDD(BaseEstimator, OutlierMixin):
             ax3.contour(xv, yv, distance, levels=[self.radius],
                         colors='C3', linewidths=7, zorder=1)
             
-            ax3.legend(["Data (+)", "Data (-)", "Support vectors"], 
+            ax3.legend(["Normals", "Outliers", "Support Vectors"], 
                       ncol=1, loc='upper left', edgecolor='black',
                       markerscale=1.2, fancybox=True) 
 
         plt.grid()
         plt.show()
+        fig.savefig("svdd_img.pdf", bbox_inches='tight')
     
 class BananaDataset():
     """

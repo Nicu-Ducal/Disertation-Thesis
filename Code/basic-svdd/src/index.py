@@ -22,21 +22,21 @@ for i in range(3):
     print(svdd.radius, svdd.offset, svdd.get_distance(X[:1]), X[:1], svdd.predict(X[:1]))
 
     # testing
-    dists = svdd.get_distance(X)
-    print(dists.shape)
-    radii = np.linspace(0, 1.5, 200)
-    outliers = np.array([np.sum(svdd.get_distance(X) > r) for r in radii])
+    # dists = svdd.get_distance(X)
+    # print(dists.shape)
+    # radii = np.linspace(0, 1.5, 200)
+    # outliers = np.array([np.sum(svdd.get_distance(X) > r) for r in radii])
 
-    print(outliers)
+    # print(outliers)
 
     # plt.plot(radii, outliers)
     plt.clf()
 
-    plt.plot(radii, outliers)
-    plt.plot(svdd.radius, np.sum(svdd.get_distance(X) > svdd.radius), 'ro')
-    plt.xlabel('raza')
-    plt.ylabel('nr. outliers')
-    plt.title("Outliers in functie de raza")
+    # plt.plot(radii, outliers)
+    # plt.plot(svdd.radius, np.sum(svdd.get_distance(X) > svdd.radius), 'ro')
+    # plt.xlabel('raza')
+    # plt.ylabel('nr. outliers')
+    # plt.title("Outliers in functie de raza")
     # plt.legend()
 plt.show()
 
